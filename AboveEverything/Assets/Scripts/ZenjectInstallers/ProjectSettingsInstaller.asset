@@ -13,11 +13,7 @@ MonoBehaviour:
   m_Name: ProjectSettingsInstaller
   m_EditorClassIdentifier: 
   ObstacleSettings:
-    SpawnCellSize: 4
     Speed: 3
-    CellsQuantityInRow: 10
-    InitCellsQuantityInHeight: 5
-    InitSpawnerPosition: {x: -20, y: 0, z: 0}
     HorizontalDynamicObstaclePrefab: {fileID: 3807251673484555813, guid: dc9bb47faef81654ba3d547356c0533a,
       type: 3}
     HorizontalStaticObstaclePrefab: {fileID: 7106666824144037389, guid: d7a94fc15416c7649a6268443706ec47,
@@ -26,3 +22,5 @@ MonoBehaviour:
       type: 3}
     VerticalStaticObstaclePrefab: {fileID: 7415913296587087615, guid: 3d7e70fae77a6f245a6f1ee3475783e4,
       type: 3}
+  LevelSettings:
+    SpawnCellSize: 4

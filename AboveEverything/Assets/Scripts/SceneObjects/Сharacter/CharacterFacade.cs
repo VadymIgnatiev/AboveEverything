@@ -2,8 +2,8 @@
 
 namespace Assets.Scripts.SceneObjects.Сharacter
 {
-    public class CharacterFacade : MonoBehaviour
+    public class CharacterFacade : MonoBehaviour, ICharacterFacade
     {
-
+        public Transform Transform => transform;
     }
 }

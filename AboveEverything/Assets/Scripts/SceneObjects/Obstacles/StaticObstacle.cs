@@ -6,9 +6,9 @@ namespace Assets.Scripts.SceneObjects.Obstacles
     {
         public Transform m_Transform { get { return transform; } }
 
-        public void Init(ObstacleSettings obstacleSettings, Vector3 cellPosition)
+        public void Init(ObstacleSettings obstacleSettings, Vector3 cellPosition, float cellSize)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

@@ -1,6 +1,8 @@
+using Assets.Scripts.Scene.Level;
 using Assets.Scripts.SceneObjects.Obstacles;
 using Assets.Scripts.SceneObjects.Obstacles.Factories;
-using UnityEngine;
+using Assets.Scripts.SceneObjects.SceneCamera;
+using Assets.Scripts.SceneObjects.Ñharacter;
 using Zenject;
 
 namespace Assets.Scripts.ZenjectInstallers
@@ -14,7 +16,16 @@ namespace Assets.Scripts.ZenjectInstallers
             Container.Bind<IObstacleFactory>().WithId(FactoryType.HorizontalStaticObstacleFactory).To<HorizontalStaticObstacleFactory>().AsSingle();
             Container.Bind<IObstacleFactory>().WithId(FactoryType.VerticalDynamicObstacleFactory).To<VerticalDynamicObstacleFactory>().AsSingle();
             Container.Bind<IObstacleFactory>().WithId(FactoryType.VerticalStaticObstacleFactory).To<VerticalStaticObstacleFactory>().AsSingle();
-            Container.Bind<ObstacleSpawner>().AsSingle();
+            Container.Bind<IObstacleSpawner>().To<ObstacleSpawner>().AsSingle();
+            #endregion
+
+            #region Scene
+            Container.Bind<LevelWindow>().AsSingle();
+            Container.Bind<ICameraFacade>().FromComponentInHierarchy().AsSingle();
+            #endregion
+
+            #region
+            Container.Bind<ICharacterFacade>().To<CharacterFacade>().AsSingle();
             #endregion
         }
     }

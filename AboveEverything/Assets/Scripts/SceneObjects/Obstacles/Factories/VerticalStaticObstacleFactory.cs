@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.SceneObjects.Obstacles.Factories;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.SceneObjects.Obstacles.Factories
 {
@@ -9,7 +8,7 @@ namespace Assets.Scripts.SceneObjects.Obstacles.Factories
         {
             GameObject obstacleObject = GameObject.Instantiate(m_ObstacleSettings.VerticalStaticObstaclePrefab);
             obstacleObject.transform.position = GetPosition(cellPosition);
-            obstacleObject.transform.localScale = new Vector3(1, m_ObstacleSettings.SpawnCellSize / 2, 1);
+            obstacleObject.transform.localScale = new Vector3(1, m_LevelSettings.SpawnCellSize / 2, 1);
             return obstacleObject.GetComponent<IObstacle>();
         }        
     }

@@ -15,10 +15,10 @@ namespace Assets.Scripts.SceneObjects.Obstacles
 
         public Transform m_Transform { get { return transform; } }        
 
-        public virtual void Init(ObstacleSettings obstacleSettings, Vector3 cellPosition)
+        public virtual void Init(ObstacleSettings obstacleSettings, Vector3 cellPosition, float spawnCellSize)
         {
             m_ObstacleSettings = obstacleSettings;
-            m_SpawnCell = m_ObstacleSettings.SpawnCellSize;
+            m_SpawnCell = spawnCellSize;
             m_Speed = m_ObstacleSettings.Speed;
 
             OffsetPosition();
