@@ -1,6 +1,7 @@
 using Assets.Scripts.Scene;
 using Assets.Scripts.Scene.Level;
 using Assets.Scripts.SceneObjects.Character;
+using Assets.Scripts.SceneObjects.Monsters;
 using Assets.Scripts.SceneObjects.Obstacles;
 using Assets.Scripts.SceneObjects.Obstacles.Factories;
 using Assets.Scripts.SceneObjects.SceneCamera;
@@ -8,7 +9,6 @@ using Assets.Scripts.SceneObjects.Weapon;
 using Assets.Scripts.SceneObjects.Weapon.Bullets;
 using Assets.Scripts.SceneObjects.Weapon.WeaponFactories;
 using Zenject;
-using static Assets.Scripts.SceneObjects.Weapon.Bullets.Bullet;
 
 namespace Assets.Scripts.ZenjectInstallers
 {
@@ -16,6 +16,9 @@ namespace Assets.Scripts.ZenjectInstallers
     {
         [Inject]
         private WeaponSettings m_WeaponSettings;
+
+        [Inject]
+        private MonstersSettings m_MonstersSettings;
 
         public override void InstallBindings()
         {
@@ -38,20 +41,20 @@ namespace Assets.Scripts.ZenjectInstallers
             #endregion
 
             #region weapon
-            Container.BindFactory<float, float, Bullet, Bullet.BulletFactoryOne>()               
-               .FromPoolableMemoryPool<float, float, Bullet, BulletPool>(poolBinder => poolBinder                   
+            Container.BindFactory<float, float, float, Bullet, Bullet.BulletFactoryOne>()               
+               .FromPoolableMemoryPool<float, float, float, Bullet, BulletPool>(poolBinder => poolBinder                   
                    .WithInitialSize(20)                   
                    .FromComponentInNewPrefab(m_WeaponSettings.Weapon1.BulletPrefab)
                    .UnderTransformGroup("Bullets"));
 
-            Container.BindFactory<float, float, Bullet, Bullet.BulletFactoryTwo>()
-               .FromPoolableMemoryPool<float, float, Bullet, BulletPool>(poolBinder => poolBinder
+            Container.BindFactory<float, float, float, Bullet, Bullet.BulletFactoryTwo>()
+               .FromPoolableMemoryPool<float, float, float, Bullet, BulletPool>(poolBinder => poolBinder
                    .WithInitialSize(20)
                    .FromComponentInNewPrefab(m_WeaponSettings.Weapon2.BulletPrefab)
                    .UnderTransformGroup("Bullets"));
 
-            Container.BindFactory<float, float, Bullet, Bullet.BulletFactoryThree>()
-               .FromPoolableMemoryPool<float, float, Bullet, BulletPool>(poolBinder => poolBinder
+            Container.BindFactory<float, float, float, Bullet, Bullet.BulletFactoryThree>()
+               .FromPoolableMemoryPool<float, float, float, Bullet, BulletPool>(poolBinder => poolBinder
                    .WithInitialSize(20)
                    .FromComponentInNewPrefab(m_WeaponSettings.Weapon3.BulletPrefab)
                    .UnderTransformGroup("Bullets"));
@@ -69,10 +72,30 @@ namespace Assets.Scripts.ZenjectInstallers
                 .FromFactory<WeaponThreeFactory>();
             #endregion
 
+            #region Monsters
+
+            Container.Bind<MonsterSpawner>().AsSingle();
+
+            Container.BindFactory<float, float, float, MonsterFacade, MonsterFacade.MonsterFactoryOne>()
+               .FromPoolableMemoryPool<float, float, float, MonsterFacade, MonsterPool>(poolBinder => poolBinder
+                   .WithInitialSize(20)
+                   .FromComponentInNewPrefab(m_MonstersSettings.Monster0.MonsterPrefab)
+                   .UnderTransformGroup("Monsters"));
+
+            Container.BindFactory<float, float, float, MonsterFacade, MonsterFacade.MonsterFactoryTwo>()
+               .FromPoolableMemoryPool<float, float, float, MonsterFacade, MonsterPool>(poolBinder => poolBinder
+                   .WithInitialSize(20)
+                   .FromComponentInNewPrefab(m_MonstersSettings.Monster1.MonsterPrefab)
+                   .UnderTransformGroup("Monsters"));
+            #endregion
         }
     }
 
-    class BulletPool : MonoPoolableMemoryPool<float, float, IMemoryPool, Bullet>
+    class BulletPool : MonoPoolableMemoryPool<float, float, float, IMemoryPool, Bullet>
+    {
+    }
+
+    class MonsterPool : MonoPoolableMemoryPool<float, float, float, IMemoryPool, MonsterFacade>
     {
     }
 }

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.SceneObjects.Damage;
+using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.SceneObjects.Weapon.Bullets
 {
-    public class Bullet : MonoBehaviour, IPoolable<float, float, IMemoryPool>
+    public class Bullet : MonoBehaviour, IPoolable<float, float, float, IMemoryPool>, IDangerous
     {
         private float m_StartTime;
         private float m_Speed;
@@ -16,26 +17,11 @@ namespace Assets.Scripts.SceneObjects.Weapon.Bullets
             get { return transform.right; }
         }
 
+        public float Damage { get; set; }
+
         public void OnTriggerEnter(Collider other)
         {
-            /*
-            var enemyView = other.GetComponent<EnemyView>();
-
-            if (enemyView != null && _type == BulletTypes.FromPlayer)
-            {
-                enemyView.Facade.Die();
-                _pool.Despawn(this);
-            }
-            else
-            {
-                var player = other.GetComponent<PlayerFacade>();
-
-                if (player != null && _type == BulletTypes.FromEnemy)
-                {
-                    player.TakeDamage(MoveDirection);
-                    _pool.Despawn(this);
-                }
-            }*/
+            m_Pool.Despawn(this);           
         }
 
         public void Update()
@@ -48,11 +34,12 @@ namespace Assets.Scripts.SceneObjects.Weapon.Bullets
             }
         }
 
-        public void OnSpawned(float speed, float lifeTime, IMemoryPool pool)
+        public void OnSpawned(float speed, float lifeTime, float damage, IMemoryPool pool)
         {
             m_Pool = pool;            
             m_Speed = speed;
-            m_LifeTime = lifeTime;            
+            m_LifeTime = lifeTime;
+            Damage = damage;
 
             m_StartTime = Time.realtimeSinceStartup;
         }
@@ -62,7 +49,7 @@ namespace Assets.Scripts.SceneObjects.Weapon.Bullets
             m_Pool = null;
         }
 
-        public abstract class BaseBulletFactory : PlaceholderFactory<float, float, Bullet> { }
+        public abstract class BaseBulletFactory : PlaceholderFactory<float, float, float, Bullet> { }
 
 
         public class BulletFactoryOne : BaseBulletFactory

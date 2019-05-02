@@ -28,7 +28,7 @@ namespace Assets.Scripts.SceneObjects.Weapon
 
         public void Fire()
         {
-            var bullet = m_BulletFactory.Create(m_Settings.BulletSpeed, m_Settings.BulletLifeTime);
+            var bullet = m_BulletFactory.Create(m_Settings.BulletSpeed, m_Settings.BulletLifeTime, m_Settings.Damage);
 
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;

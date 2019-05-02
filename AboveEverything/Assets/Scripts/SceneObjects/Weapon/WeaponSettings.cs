@@ -13,6 +13,7 @@ namespace Assets.Scripts.SceneObjects.Weapon
             public GameObject BulletPrefab;
             public float BulletSpeed;
             public float BulletLifeTime;
+            public float Damage;
         }
 
         public Weapon Weapon1;

@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.SceneObjects.Obstacles;
+﻿using Assets.Scripts.SceneObjects.Monsters;
+using Assets.Scripts.SceneObjects.Obstacles;
 using Assets.Scripts.SceneObjects.SceneCamera;
 using UnityEngine;
 using Zenject;
@@ -15,6 +16,9 @@ namespace Assets.Scripts.Scene.Level
 
         [Inject]
         public IObstacleSpawner m_ObstacleSpawner;
+
+        [Inject]
+        public MonsterSpawner m_MonsterSpawner;
 
         public float Bottom => -ExtentHeight;
 
@@ -35,6 +39,7 @@ namespace Assets.Scripts.Scene.Level
 
         private float m_CellSize;
         private Vector3 m_CurrentRowPosition;
+        private Vector3 m_NextRowPosition;
         private int m_CellQuantityInRow;        
         private int m_InitCellsQuantityInHeight;
 
@@ -44,6 +49,8 @@ namespace Assets.Scripts.Scene.Level
 
             m_CellSize = m_LevelSettings.SpawnCellSize;
             m_CurrentRowPosition = new Vector3(Left, 0, 0);
+            m_NextRowPosition = m_CurrentRowPosition;
+            m_NextRowPosition.y += m_CellSize;
             m_CellQuantityInRow = Mathf.RoundToInt(Width / m_CellSize);
             m_InitCellsQuantityInHeight = Mathf.RoundToInt(Height / m_CellSize);
             m_Camera.ChangedHeight += SpawnRowIfNeed;
@@ -57,6 +64,7 @@ namespace Assets.Scripts.Scene.Level
                 MoveToNextRow();
                 SpawnObstacles();
             }
+            SpawnMonsters();
         }
 
         private void SpawnRowIfNeed()
@@ -65,12 +73,14 @@ namespace Assets.Scripts.Scene.Level
             {
                 MoveToNextRow();
                 SpawnObstacles();
+                SpawnMonsters();
             }
         }
 
         private void MoveToNextRow()
         {
             m_CurrentRowPosition.y += m_CellSize;
+            m_NextRowPosition.y += m_CellSize;
         }
 
         private void SpawnObstacles()
@@ -80,6 +90,20 @@ namespace Assets.Scripts.Scene.Level
                 Vector3 cellPosition = m_CurrentRowPosition;
                 cellPosition.x += m_CellSize * i;
                 m_ObstacleSpawner.SpawnObstacleInCell(cellPosition);
+            }
+        }
+
+        private void SpawnMonsters()
+        {
+            for (int i = 0; i < m_CellQuantityInRow; i++)
+            {
+                Vector3 cellPosition = m_NextRowPosition;
+                cellPosition.x += m_CellSize * i;
+
+                int index = Random.Range(0, 3);
+
+                if(index == 0)
+                    m_MonsterSpawner.Spawn(cellPosition);
             }
         }
 

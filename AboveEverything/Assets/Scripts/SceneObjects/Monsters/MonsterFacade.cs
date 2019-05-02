@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.SceneObjects.Damage;
+using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.SceneObjects.Monsters
 {
-    public class MonsterFacade : MonoBehaviour
+    public class MonsterFacade : MonoBehaviour, IDamageable, IPoolable<float, float, float, IMemoryPool>
     {
         public enum MonsterOrientetion
         {
@@ -26,6 +28,17 @@ namespace Assets.Scripts.SceneObjects.Monsters
         private Transform m_RightSensor;
 
         private MonsterOrientetion Orientation = MonsterOrientetion.Forward;
+
+        private IMemoryPool m_Pool;
+
+        private float m_Damage;
+        private float m_Helth;
+        private float m_MovingSpeed;
+
+        public void Init()
+        {
+            
+        }
 
         public void Update()
         {
@@ -77,5 +90,49 @@ namespace Assets.Scripts.SceneObjects.Monsters
             }
             return false;
         }
+
+        public void TakeDamage(float damage)
+        {
+            m_Helth -= damage;
+
+            if (m_Helth < 0)
+            {
+                m_Pool.Despawn(this);
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            IDangerous dangerous = other.GetComponent<IDangerous>();
+
+            if (dangerous == null) return;
+
+            TakeDamage(dangerous.Damage);
+        }
+
+        public void OnDespawned()
+        {
+            m_Pool = null;
+        }
+
+        public void OnSpawned(float damage, float helth, float movingSpeed, IMemoryPool p1)
+        {
+            m_Pool = p1;
+            m_Damage = damage;
+            m_Helth = helth;
+            m_MovingSpeed = movingSpeed;
+        }
+
+        public abstract class MonsterFactory : PlaceholderFactory<float, float, float, MonsterFacade> { }
+
+
+        public class MonsterFactoryOne : MonsterFactory
+        { 
+        }
+
+        public class MonsterFactoryTwo : MonsterFactory
+        {
+        }
+
     }
 }

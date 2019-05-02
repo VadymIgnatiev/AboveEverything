@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Scene.Level;
 using Assets.Scripts.SceneObjects.Character;
+using Assets.Scripts.SceneObjects.Monsters;
 using Assets.Scripts.SceneObjects.Obstacles;
 using Assets.Scripts.SceneObjects.SceneCamera;
 using Assets.Scripts.SceneObjects.Weapon;
@@ -16,6 +17,7 @@ namespace Assets.Scripts.ZenjectInstallers
         public CharacterSettings CharacterSettings;
         public WeaponSettings WeaponSettings;
         public CameraSettings CameraSettings;
+        public MonstersSettings MonstersSettings;
 
         public override void InstallBindings()
         {
@@ -24,6 +26,7 @@ namespace Assets.Scripts.ZenjectInstallers
             Container.BindInstance(CharacterSettings).IfNotBound();
             Container.BindInstance(WeaponSettings).IfNotBound();
             Container.BindInstance(CameraSettings).IfNotBound();
+            Container.BindInstance(MonstersSettings).IfNotBound();
         }
     }
 }

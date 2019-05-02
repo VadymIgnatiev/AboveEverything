@@ -43,6 +43,7 @@ MonoBehaviour:
         type: 3}
       BulletSpeed: 15
       BulletLifeTime: 20
+      Damage: 10
     Weapon2:
       Prefab: {fileID: 8109160394611145949, guid: 7eded8f440f9c6f49a1b1d3d58cf65bb,
         type: 3}
@@ -50,6 +51,7 @@ MonoBehaviour:
         type: 3}
       BulletSpeed: 10
       BulletLifeTime: 20
+      Damage: 30
     Weapon3:
       Prefab: {fileID: 2713748637325531709, guid: 737ae64e2a2ac7c40b5fb66814266ca7,
         type: 3}
@@ -57,5 +59,19 @@ MonoBehaviour:
         type: 3}
       BulletSpeed: 5
       BulletLifeTime: 20
+      Damage: 50
   CameraSettings:
     MinCameraHeight: 5
+  MonstersSettings:
+    Monster0:
+      Helth: 150
+      MovingSpead: 3
+      Damage: 50
+      MonsterPrefab: {fileID: 8786267409811915759, guid: faec568c9a66000458877cba3ea0b55b,
+        type: 3}
+    Monster1:
+      Helth: 250
+      MovingSpead: 2
+      Damage: 100
+      MonsterPrefab: {fileID: 5050838483626292279, guid: aea33bab33f056347b4ef0753880ffd0,
+        type: 3}
