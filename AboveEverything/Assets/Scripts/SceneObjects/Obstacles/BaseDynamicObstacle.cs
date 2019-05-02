@@ -13,13 +13,16 @@ namespace Assets.Scripts.SceneObjects.Obstacles
         protected Vector3 m_StartPosition;
         protected Vector3 m_EndPosition;
 
-        public Transform m_Transform { get { return transform; } }        
+        public Transform m_Transform { get { return transform; } }
 
-        public virtual void Init(ObstacleSettings obstacleSettings, Vector3 cellPosition, float spawnCellSize)
+        public float Damage { get; set; }
+
+        public virtual void Init(ObstacleSettings obstacleSettings, Vector3 cellPosition, float spawnCellSize, float damage)
         {
             m_ObstacleSettings = obstacleSettings;
             m_SpawnCell = spawnCellSize;
             m_Speed = m_ObstacleSettings.Speed;
+            Damage = damage;
 
             OffsetPosition();
             SetStartEndPosition(cellPosition);

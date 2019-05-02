@@ -9,5 +9,6 @@ namespace Assets.Scripts.SceneObjects.SceneCamera
         float Aspect { get; }
         Transform Transform { get; }
         event Action ChangedHeight;
+        void SetTargetTransform(Transform targetTransform);
     }
 }

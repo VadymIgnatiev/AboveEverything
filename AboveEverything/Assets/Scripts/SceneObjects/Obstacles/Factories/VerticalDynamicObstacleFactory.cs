@@ -10,7 +10,7 @@ namespace Assets.Scripts.SceneObjects.Obstacles.Factories
             obstacleObject.transform.position = GetPosition(cellPosition);
             obstacleObject.transform.localScale = new Vector3(1, m_LevelSettings.SpawnCellSize / 2, 1);
             IObstacle obstacle = obstacleObject.GetComponent<IObstacle>();
-            obstacle.Init(m_ObstacleSettings, cellPosition, m_LevelSettings.SpawnCellSize);
+            obstacle.Init(m_ObstacleSettings, cellPosition, m_LevelSettings.SpawnCellSize, m_ObstacleSettings.VerticalDynamicObstacleDamage);
             return obstacle;
         }
     }

@@ -7,11 +7,15 @@ namespace Assets.Scripts.Scene
     public class SceneRunner : MonoBehaviour
     {
         [Inject]
-        private LevelWindow LevelWindow;
+        private LevelWindow m_LevelWindow;
+
+        [Inject]
+        private SceneManager m_SceneManager;
 
         public void Start()
         {
-            LevelWindow.Init();
+            m_LevelWindow.Init();
+            m_SceneManager.Init();
         }
     }
 }

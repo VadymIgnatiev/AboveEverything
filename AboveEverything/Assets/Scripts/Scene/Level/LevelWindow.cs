@@ -47,6 +47,7 @@ namespace Assets.Scripts.Scene.Level
             m_CellQuantityInRow = Mathf.RoundToInt(Width / m_CellSize);
             m_InitCellsQuantityInHeight = Mathf.RoundToInt(Height / m_CellSize);
             m_Camera.ChangedHeight += SpawnRowIfNeed;
+            InitScene();
         }
 
         private void InitScene()
@@ -60,7 +61,7 @@ namespace Assets.Scripts.Scene.Level
 
         private void SpawnRowIfNeed()
         {
-            if (m_CurrentRowPosition.y - Top < m_CellSize)
+            if (m_CurrentRowPosition.y - Top < 2 * m_CellSize)
             {
                 MoveToNextRow();
                 SpawnObstacles();

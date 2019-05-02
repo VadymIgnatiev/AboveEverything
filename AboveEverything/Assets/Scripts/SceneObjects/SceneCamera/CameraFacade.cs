@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.SceneObjects.Сharacter;
-using System;
+﻿using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,8 +6,8 @@ namespace Assets.Scripts.SceneObjects.SceneCamera
 {
     public class CameraFacade : MonoBehaviour, ICameraFacade
     {
-        private Transform m_TargetTransform;
-        private Camera m_Camera;
+        public Camera m_Camera;
+        private Transform m_TargetTransform;        
         private float m_YPreviousPosition;
 
         public float FieldOfView => m_Camera.fieldOfView;
@@ -19,17 +18,11 @@ namespace Assets.Scripts.SceneObjects.SceneCamera
 
         public event Action ChangedHeight = () => { };
 
+        [Inject]
+        private CameraSettings m_CameraSettings;
+
         public void Start()
         {
-            m_Camera = GetComponent<Camera>();
-        }
-
-        public void Update()
-        {
-            if (Math.Abs(m_Camera.transform.position.y - m_YPreviousPosition) < 0.001)
-            {
-                ChangedHeight();
-            }
             m_YPreviousPosition = m_Camera.transform.position.y;
         }
 
@@ -40,7 +33,19 @@ namespace Assets.Scripts.SceneObjects.SceneCamera
 
         public void LateUpdate()
         {
-            //m_Camera.transform.LookAt(m_TargetTransform);
+            if (m_TargetTransform.position.y > m_CameraSettings.MinCameraHeight)
+            {
+                float x = m_Camera.transform.position.x;
+                float y = m_TargetTransform.position.y;
+                float z = m_Camera.transform.position.z;
+                m_Camera.transform.position = new Vector3(x, y, z);
+            }
+
+            if (Math.Abs(m_Camera.transform.position.y - m_YPreviousPosition) > 0.001)
+            {
+                ChangedHeight();
+            }
+            m_YPreviousPosition = m_Camera.transform.position.y;
         }
     }
 }

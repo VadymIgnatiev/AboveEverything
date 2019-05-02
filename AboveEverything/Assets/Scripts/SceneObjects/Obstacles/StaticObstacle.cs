@@ -6,9 +6,11 @@ namespace Assets.Scripts.SceneObjects.Obstacles
     {
         public Transform m_Transform { get { return transform; } }
 
-        public void Init(ObstacleSettings obstacleSettings, Vector3 cellPosition, float cellSize)
+        public float Damage { get; set; }
+
+        public void Init(ObstacleSettings obstacleSettings, Vector3 cellPosition, float spawnCellSize, float damage)
         {
-            
+            Damage = damage;
         }
     }
 }

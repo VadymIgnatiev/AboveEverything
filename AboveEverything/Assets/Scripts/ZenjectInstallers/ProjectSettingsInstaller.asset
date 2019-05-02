@@ -16,11 +16,46 @@ MonoBehaviour:
     Speed: 3
     HorizontalDynamicObstaclePrefab: {fileID: 3807251673484555813, guid: dc9bb47faef81654ba3d547356c0533a,
       type: 3}
+    HorizontalDynamicObstacleDamege: 100
     HorizontalStaticObstaclePrefab: {fileID: 7106666824144037389, guid: d7a94fc15416c7649a6268443706ec47,
       type: 3}
+    HorizontalStaticObstacleDamage: 100
     VerticalDynamicObstaclePrefab: {fileID: 3402259154004456537, guid: cb3d3f7cc376ffd4c9ff83ef3bc2dbb6,
       type: 3}
+    VerticalDynamicObstacleDamage: 50
     VerticalStaticObstaclePrefab: {fileID: 7415913296587087615, guid: 3d7e70fae77a6f245a6f1ee3475783e4,
       type: 3}
+    VerticalStaticObstacleDamage: 50
   LevelSettings:
     SpawnCellSize: 4
+  CharacterSettings:
+    MovingSpeed: 5
+    DamageSpeed: 7
+    DamageSlowing: 40
+    DamageTime: 0.5
+    Helth: 500
+    Protection: 500
+  WeaponSettings:
+    Weapon1:
+      Prefab: {fileID: 1684936032375197702, guid: 4d6aa78c10943ea4e95e0bd246c83219,
+        type: 3}
+      BulletPrefab: {fileID: 1684936032375197702, guid: 329e1c81bd0408547800fda0db5c8364,
+        type: 3}
+      BulletSpeed: 15
+      BulletLifeTime: 20
+    Weapon2:
+      Prefab: {fileID: 8109160394611145949, guid: 7eded8f440f9c6f49a1b1d3d58cf65bb,
+        type: 3}
+      BulletPrefab: {fileID: 8109160394611145949, guid: b15c76b90db619b438ffd907eacd0cf9,
+        type: 3}
+      BulletSpeed: 10
+      BulletLifeTime: 20
+    Weapon3:
+      Prefab: {fileID: 2713748637325531709, guid: 737ae64e2a2ac7c40b5fb66814266ca7,
+        type: 3}
+      BulletPrefab: {fileID: 3039882721203382754, guid: c0bc571fa362bb54f9acd06b60a2d02f,
+        type: 3}
+      BulletSpeed: 5
+      BulletLifeTime: 20
+  CameraSettings:
+    MinCameraHeight: 5

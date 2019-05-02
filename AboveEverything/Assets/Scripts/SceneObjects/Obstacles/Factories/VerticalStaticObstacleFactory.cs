@@ -9,7 +9,9 @@ namespace Assets.Scripts.SceneObjects.Obstacles.Factories
             GameObject obstacleObject = GameObject.Instantiate(m_ObstacleSettings.VerticalStaticObstaclePrefab);
             obstacleObject.transform.position = GetPosition(cellPosition);
             obstacleObject.transform.localScale = new Vector3(1, m_LevelSettings.SpawnCellSize / 2, 1);
-            return obstacleObject.GetComponent<IObstacle>();
+            var obstacle = obstacleObject.GetComponent<IObstacle>();
+            obstacle.Init(m_ObstacleSettings, cellPosition, m_LevelSettings.SpawnCellSize, m_ObstacleSettings.VerticalStaticObstacleDamage);
+            return obstacle;
         }        
     }
 }
