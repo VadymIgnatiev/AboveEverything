@@ -31,7 +31,7 @@ namespace Assets.Scripts.SceneObjects.Monsters
             }
             else
             {
-                monster = m_MonsterFactoryOne
+                monster = m_MonsterFactoryTwo
                     .Create(m_MonstersSettings.Monster1.Damage,
                     m_MonstersSettings.Monster1.Helth,
                     m_MonstersSettings.Monster1.MovingSpead);

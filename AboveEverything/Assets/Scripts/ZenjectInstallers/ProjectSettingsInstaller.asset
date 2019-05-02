@@ -73,5 +73,5 @@ MonoBehaviour:
       Helth: 250
       MovingSpead: 2
       Damage: 100
-      MonsterPrefab: {fileID: 5050838483626292279, guid: aea33bab33f056347b4ef0753880ffd0,
+      MonsterPrefab: {fileID: 8786267409811915759, guid: be3a666a57e5adc409af8acf59693e3e,
         type: 3}

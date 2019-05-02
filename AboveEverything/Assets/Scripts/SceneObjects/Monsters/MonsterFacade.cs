@@ -103,11 +103,14 @@ namespace Assets.Scripts.SceneObjects.Monsters
 
         private void OnTriggerEnter(Collider other)
         {
-            IDangerous dangerous = other.GetComponent<IDangerous>();
+            if (other.name == "Bullet(Clone)")
+            {
+                IDangerous dangerous = other.GetComponent<IDangerous>();
 
-            if (dangerous == null) return;
+                if (dangerous == null) return;
 
-            TakeDamage(dangerous.Damage);
+                TakeDamage(dangerous.Damage);
+            }
         }
 
         public void OnDespawned()
