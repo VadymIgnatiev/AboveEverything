@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/projectSettingsUpdater.xml
+/modules.xml
+/.idea.AboveEverything.iml
+# Datasource local storage ignored files
+/../../../../../../../../../../:\Users\Vadim\Documents\MyUnityProjects\AboveEverything\AboveEverything\.idea\.idea.AboveEverything\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
