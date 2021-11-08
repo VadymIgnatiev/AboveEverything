@@ -30,8 +30,8 @@ namespace Assets.Scripts.SceneObjects.Obstacles
 
             int initDirection = Random.Range(0, 2);            
 
-            m_FromEndToStart = initDirection == 0 ? true : false;
-            m_FromStartToEnd = initDirection == 0 ? false : true;
+            m_FromEndToStart = initDirection == 0;
+            m_FromStartToEnd = initDirection != 0;
         }
 
         protected abstract void SetStartEndPosition(Vector3 cellPosition);

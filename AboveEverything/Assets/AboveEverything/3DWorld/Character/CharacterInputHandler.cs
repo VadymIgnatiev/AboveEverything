@@ -112,7 +112,6 @@ namespace Assets.Scripts.SceneObjects.Character
             {
                 m_CharacterState.IsMovingDown = false;
                 ProcessRestPress();
-                return;
             }
         }
 

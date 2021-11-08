@@ -8,11 +8,11 @@ namespace Assets.Scripts.SceneObjects.Character
         
         private CharacterState m_CharacterState { get; set; }
 
-        readonly float m_MovingSpeed;
-        readonly float m_DamageSpeed;
-        readonly float m_DamageSlowing;
-        readonly float m_DamageTime;
-        private float m_RestDamageTime;
+        private readonly float _movingSpeed;
+        private readonly float _damageSpeed;
+        private readonly float _damageSlowing;
+        private readonly float _damageTime;
+        private float _restDamageTime;
 
 
         public CharacterMoveHandler(
@@ -23,21 +23,21 @@ namespace Assets.Scripts.SceneObjects.Character
             m_CharacterFacade = characterFacade;
             m_CharacterState = characterInputState;
             characterInputState.Damage += SetDamagingMoving;
-            m_MovingSpeed = characterSettings.MovingSpeed;
-            m_DamageSpeed = characterSettings.DamageSpeed;
-            m_DamageSlowing = characterSettings.DamageSlowing;
-            m_DamageTime = characterSettings.DamageTime;
+            _movingSpeed = characterSettings.MovingSpeed;
+            _damageSpeed = characterSettings.DamageSpeed;
+            _damageSlowing = characterSettings.DamageSlowing;
+            _damageTime = characterSettings.DamageTime;
 
         }
 
         private void MoveCharacter()
         {
-            m_CharacterFacade.Transform.position += m_CharacterFacade.Transform.up * m_MovingSpeed * Time.deltaTime;
+            m_CharacterFacade.Transform.position += m_CharacterFacade.Transform.up * _movingSpeed * Time.deltaTime;
         }
 
         public void SetDamagingMoving()
         {
-            m_RestDamageTime = m_DamageTime;
+            _restDamageTime = _damageTime;
         }
 
         public void Update()
@@ -46,16 +46,16 @@ namespace Assets.Scripts.SceneObjects.Character
 
             if (m_CharacterState.IsDamaging)
             {
-                m_CharacterFacade.Transform.position -= m_CharacterFacade.Transform.up * m_DamageSpeed * Time.deltaTime
-                    + m_CharacterFacade.Transform.up * m_DamageSlowing * Time.deltaTime * Time.deltaTime / 2;
+                m_CharacterFacade.Transform.position -= m_CharacterFacade.Transform.up * _damageSpeed * Time.deltaTime
+                    + m_CharacterFacade.Transform.up * _damageSlowing * Time.deltaTime * Time.deltaTime / 2;
 
-                if (m_RestDamageTime < 0)
+                if (_restDamageTime < 0)
                 {
                     m_CharacterState.IsDamaging = false;
                 }
                 else
                 {
-                    m_RestDamageTime -= Time.deltaTime;
+                    _restDamageTime -= Time.deltaTime;
                 }
 
                 return;
